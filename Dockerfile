@@ -1,9 +1,9 @@
 # Created on Jul. 1, 2016
-# @author: Sam
+# @author: Sam, yvictor
 
 FROM ubuntu:16.04
 
-MAINTAINER samsam2310@gmail.com
+MAINTAINER samsam2310@gmail.com, fate2314@gmail.com
 
 # install python2.7 && python-dev && wget && cron/crontab && gcc
 RUN apt-get update && apt-get install -y python2.7 python-dev wget cron build-essential
@@ -11,3 +11,5 @@ RUN apt-get update && apt-get install -y python2.7 python-dev wget cron build-es
 RUN wget https://bootstrap.pypa.io/get-pip.py -O- | python
 # install python-lxml
 RUN apt-get update && apt-get install -y python-lxml
+# preinstall requirement package
+RUN pip install requests pyquery pymongo python-amazon-mws celery raven
