@@ -13,9 +13,10 @@ RUN apt-get update --fix-missing && apt-get install -y make g++ wget bzip2 ca-ce
 
 # change to use pyenv to management python env
 # RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+# miniconda2-4.1.11
 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-4.1.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-4.1.11-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh
 
@@ -47,11 +48,9 @@ RUN [ "/bin/bash" ]
 CMD [ "/bin/bash" ]
 
 WORKDIR /home
-RUN conda config --set auto_update_conda False
-RUN conda install numpy pandas scipy theano h5py pytables pillow html5lib -y
+# RUN conda config --set auto_update_conda False
 RUN conda install -c anaconda beautifulsoup4 lxml=3.7.0 -y
-RUN conda install -c conda-forge tensorflow=0.10.0 -y
-RUN pip install selenium beautifulsoup4 xvfbwrapper PyVirtualDisplay keras==1.1.1
+RUN pip install selenium beautifulsoup4 xvfbwrapper PyVirtualDisplay
 
 CMD [ "/bin/bash" ]
 
