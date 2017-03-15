@@ -7,18 +7,21 @@ MAINTAINER yvictor
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-RUN apt-get update --fix-missing && apt-get install -y make g++ wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 \
-    git mercurial subversion
+RUN apt-get update --fix-missing && apt-get install -y curl git
+
+#RUN apt-get update --fix-missing && apt-get install -y make g++ wget bzip2 ca-certificates \
+    #libglib2.0-0 libxext6 libsm6 libxrender1 \
+    #git mercurial subversion
+
+ENV PYENV_ROOT /root/.pyenv
+ENV PATH /root/.pyenv/shims:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+RUN pyenv install miniconda2-4.1.11
+RUN pyenv global miniconda2-4.1.11
 
 # change to use pyenv to management python env
 # RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 # miniconda2-4.1.11
-
-RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda2-4.1.11-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh
 
 RUN apt-get install -y curl grep sed dpkg git xvfb firefox && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
@@ -40,22 +43,19 @@ RUN tar -xvf geckodriver-v0.12.0-linux64.tar.gz && \
 #RUN curl "https://gist.githubusercontent.com/amberj/6695353/raw/d7d981379c9602e6323d09a90d6a84cd3e3177a2/setup-headless-selenium-xvfb.sh"
     #/bin/bash setup-headless-selenium-xvfb.sh
 
-ENV PATH /opt/conda/bin:$PATH
-
-
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
-RUN [ "/bin/bash" ]
-CMD [ "/bin/bash" ]
 
 WORKDIR /home
 # RUN conda config --set auto_update_conda False
 RUN conda install -c anaconda beautifulsoup4 lxml=3.7.0 -y
-RUN pip install selenium beautifulsoup4 xvfbwrapper PyVirtualDisplay
+RUN pip install selenium beautifulsoup4 xvfbwrapper PyVirtualDisplay requests pyquery pymongo python-amazon-mws celery raven
 
 CMD [ "/bin/bash" ]
 
-COPY . /docker_conda
-WORKDIR /docker_conda
+COPY . /docker-crawlerbase
+WORKDIR /docker-crawlerbase
 
 RUN python test.py
+
+WORKDIR /home
+RUN rm -r -f /docker-crawlerbase
 
