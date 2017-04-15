@@ -14,4 +14,4 @@ driver = webdriver.Firefox()
 test_url = "http://twtraffic.tra.gov.tw/twrail/"
 driver.get(test_url)
 print("Done Selenium Work Well.")
-display.close()
+display.sendstop()
