@@ -7,12 +7,12 @@ MAINTAINER yvictor
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-RUN apt-get update --fix-missing && apt-get install -y curl git
+RUN apt-get update --fix-missing && apt-get install -y curl git make
 
 #RUN apt-get update --fix-missing && apt-get install -y make g++ wget bzip2 ca-certificates \
     #libglib2.0-0 libxext6 libsm6 libxrender1 \
     #git mercurial subversion
-RUN apt-get update && apt-get install -y wget cron build-essential
+
 
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH /root/.pyenv/shims:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
