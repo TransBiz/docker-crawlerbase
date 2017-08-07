@@ -1,7 +1,7 @@
 # Created on Mar. 8, 2017
 # @author: Yvictor
 
-FROM ubuntu:latest
+FROM ubuntu:14.04
 
 MAINTAINER yvictor
 
