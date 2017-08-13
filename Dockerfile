@@ -56,7 +56,6 @@ RUN chmod +x /start.sh
 
 EXPOSE 9100 9101 2090 53
 
-RUN ./start.sh &&
 # CMD ["./start.sh"]
 
 RUN apt-get install -y curl grep sed dpkg git xvfb firefox && \
@@ -90,8 +89,8 @@ CMD [ "/bin/bash" ]
 COPY . /docker-crawlerbase
 WORKDIR /docker-crawlerbase
 
-RUN python test.py
+RUN ./start.sh & python test.py
 
 WORKDIR /home
 RUN rm -r -f /docker-crawlerbase
-
+CMD ["./start.sh"]
