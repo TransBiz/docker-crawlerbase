@@ -89,7 +89,7 @@ CMD [ "/bin/bash" ]
 COPY . /docker-crawlerbase
 WORKDIR /docker-crawlerbase
 
-RUN ./start.sh & python test.py
+RUN /bin/bash ./start.sh & python test.py
 
 WORKDIR /home
 RUN rm -r -f /docker-crawlerbase

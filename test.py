@@ -9,7 +9,7 @@ from pyvirtualdisplay import Display
 
 print("Python Version: %s" % sys.version)
 
-time.sleep(100)
+time.sleep(300)
 
 proxies = {'http': 'http://localhost:9100'}
 for i in range(5):
