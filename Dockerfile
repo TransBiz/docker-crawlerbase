@@ -1,13 +1,13 @@
 # Created on Mar. 8, 2017
 # @author: Yvictor
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER yvictor
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-RUN apt-get update --fix-missing && apt-get install -y curl git make
+RUN apt-get update --fix-missing && apt-get install -y curl git make bzip2
 
 #RUN apt-get update --fix-missing && apt-get install -y make g++ wget bzip2 ca-certificates \
     #libglib2.0-0 libxext6 libsm6 libxrender1 \
