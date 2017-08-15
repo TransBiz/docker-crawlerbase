@@ -93,4 +93,4 @@ RUN /bin/bash ./start.sh & python test.py
 
 WORKDIR /home
 RUN rm -r -f /docker-crawlerbase
-CMD ["./start.sh"]
+ENTRYPOINT ["./start.sh"]
