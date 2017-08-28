@@ -25,7 +25,7 @@ RUN pyenv global miniconda3-4.1.11
 # miniconda2-4.1.11
 
 ### tor part
-RUN apt-get -qq install --yes build-essential libevent-dev libssl-dev curl g++
+RUN apt-get -qq install --yes build-essential libevent-dev libssl-dev curl g++ vim
 # install tor
 ENV TOR_VERSION 0.2.8.14
 RUN curl -0 -L https://www.torproject.org/dist/tor-${TOR_VERSION}.tar.gz | tar xz -C /tmp
