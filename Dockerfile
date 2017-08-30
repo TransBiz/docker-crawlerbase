@@ -17,8 +17,8 @@ RUN apt-get update --fix-missing && apt-get install -y curl git make
 ENV PYENV_ROOT /root/.pyenv
 ENV PATH /root/.pyenv/shims:/root/.pyenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-RUN pyenv install miniconda2-4.1.11
-RUN pyenv global miniconda2-4.1.11
+RUN pyenv install miniconda3-4.1.11
+RUN pyenv global miniconda3-4.1.11
 
 # change to use pyenv to management python env
 # RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
