@@ -1,10 +1,10 @@
 #!/bin/sh
 
-rm /etc/resolv.conf
-echo "nameserver 127.0.0.1" > /etc/resolv.conf
-resolvconf -u
-ifdown -a
-ifup -a
+#rm /etc/resolv.conf
+#echo "nameserver 127.0.0.1" > /etc/resolv.conf
+#resolvconf -u
+#ifdown -a
+#ifup -a
 
 # launch 10 tors
 /usr/local/bin/tor --SocksPort 9051 --PidFile /var/run/tor/1.pid --RunAsDaemon 1 --DataDirectory /var/db/tor/1
