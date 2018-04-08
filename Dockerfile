@@ -37,7 +37,7 @@ RUN cd /tmp/tor-${TOR_VERSION} && make install
 ENV DELEGATE_VERSION 9.9.13
 RUN curl ftp://anonymous@ftp.delegate.org/pub/DeleGate/delegate${DELEGATE_VERSION}.tar.gz | tar xz -C /tmp
 RUN echo "ADMIN=root@root.com" > /tmp/delegate${DELEGATE_VERSION}/src/DELEGATE_CONF
-#RUN sed -i -e '1i#include <util.h>\' /tmp/delegate${DELEGATE_VERSION}/maker/_-forkpty.c
+RUN sed -i -e '1i#include <util.h>\' /tmp/delegate${DELEGATE_VERSION}/maker/_-forkpty.c
 RUN cd /tmp/delegate${DELEGATE_VERSION} && make
 
 
@@ -53,6 +53,7 @@ RUN mkdir -p /var/db/tor/1 /var/db/tor/2 /var/db/tor/3 /var/db/tor/4 /var/db/tor
 RUN chmod -R 700 /var/db/tor
 ADD start.sh /
 RUN chmod +x /start.sh
+ADD ./torrc /usr/local/etc/tor/torrc
 
 EXPOSE 9100 9101 2090 53
 
@@ -89,9 +90,9 @@ CMD [ "/bin/bash" ]
 COPY . /docker-crawlerbase
 WORKDIR /docker-crawlerbase
 
-RUN /bin/bash ./start.sh & python test.py
+RUN /bin/bash /start.sh & python test.py
 
 WORKDIR /home
 #RUN rm -r -f /docker-crawlerbase
 
-ENTRYPOINT ["/docker-crawlerbase/start.sh"]
+ENTRYPOINT ["/start.sh"]
